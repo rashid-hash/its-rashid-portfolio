@@ -1,14 +1,14 @@
+import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
-export default function RequireAuth({ children }: { children: JSX.Element }) {
+export default function RequireAuth({ children }: { children: ReactNode }) {
   const { currentUser } = useAuth();
 
-  // ডিজাইন দেখার জন্য আমরা এই সিকিউরিটি চেক সাময়িকভাবে বন্ধ করে রাখছি:
-  
-  // if (!currentUser) {
-  //   return <Navigate to="/login" replace />;
-  // }
+  // লাইভ সার্ভারের জন্য সিকিউরিটি চেক অন করে দেওয়া হলো
+  if (!currentUser) {
+    return <Navigate to="/login" replace />;
+  }
 
-  return children;
+  return <>{children}</>;
 }
