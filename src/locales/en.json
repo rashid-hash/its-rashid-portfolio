@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "services": "Services",
+    "lab": "Creative Lab",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Abdur Rashid",
+    "title": "Creative Developer & Digital Innovator",
+    "heading": "Building Digital Experiences. Exploring New Possibilities.",
+    "subheading": "From creative concepts to functional digital products, I explore, design, and develop solutions that connect technology with real-world needs.",
+    "cta_primary": "Explore My Work",
+    "cta_secondary": "Let's Connect"
+  }
+}
