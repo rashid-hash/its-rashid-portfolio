@@ -2,19 +2,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle2, Sparkles, Code, Heart, Megaphone, Smartphone, Shield } from 'lucide-react';
 import { servicesData } from '../../data/services';
-import { AlertTriangle } from 'lucide-react';
 
 export default function Services() {
   const { i18n } = useTranslation();
   const lang = i18n.language as 'en' | 'bn';
   
-  // Prothom category ta default active thakbe
   const [activeTab, setActiveTab] = useState(servicesData[0].id);
-  
-  // Je category ta active ache, tar data filter kora
   const activeService = servicesData.find(service => service.id === activeTab);
 
-  // Category er icon gulo add kora
   const getIcon = (id: string) => {
     switch(id) {
       case 'portfolio-website': return <Code size={18} />;
@@ -29,18 +24,6 @@ export default function Services() {
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto animate-fade-in">
-
-        {/* Temporary Notice Banner (Red Marked Area) */}
-      <div className="max-w-7xl mx-auto mb-8 animate-fade-in">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 bg-accent-primary/10 border border-accent-primary/20 px-6 py-3 rounded-2xl text-accent-primary shadow-[0_0_15px_rgba(139,158,255,0.1)]">
-          <AlertTriangle size={18} className="animate-pulse shrink-0" />
-          <span className="text-sm font-medium tracking-wide text-center">
-            {i18n.language === 'en' 
-              ? 'Website is currently under construction. New features are being added.' 
-              : 'ওয়েবসাইটের ডেভেলপমেন্ট কাজ চলমান রয়েছে। নতুন ফিচার যুক্ত করা হচ্ছে।'}
-          </span>
-        </div>
-      </div>
         
         {/* Page Header */}
         <div className="text-center mb-12">
@@ -54,7 +37,7 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Categories Tab Navigation (Red Marked Area) */}
+        {/* Categories Tab Navigation */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           {servicesData.map((service) => (
             <button
@@ -76,14 +59,6 @@ export default function Services() {
         {activeService && (
           <div className="animate-fade-in" key={activeService.id}>
             
-            {/* Service Title */}
-            <div className="text-center mb-12 hidden"> {/* Optional: Title hide kora hocche karon tab e title deya ache */}
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-accent-primary mb-2">
-                {activeService.title[lang]}
-              </h2>
-              <p className="text-text-secondary">{activeService.description[lang]}</p>
-            </div>
-
             {/* Pricing Cards Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {activeService.packages.map((pkg, index) => (
@@ -127,29 +102,40 @@ export default function Services() {
               ))}
             </div>
 
+            {/* NEW: Service Details Section */}
+            {activeService.details && (
+              <div className="mt-16 bg-surface-secondary/30 border border-white/5 rounded-3xl p-8 lg:p-12">
+                <h3 className="text-2xl font-serif font-bold text-text-primary mb-8 text-center md:text-left">
+                  {lang === 'en' ? 'Service Overview' : 'সার্ভিস ওভারভিউ'}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                  {activeService.details[lang].map((detail, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="w-2 h-2 rounded-full bg-accent-primary mt-2 shrink-0 shadow-[0_0_8px_rgba(139,158,255,0.8)]"></div>
+                      <p className="text-text-secondary leading-relaxed text-sm md:text-base">{detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         )}
-        {/* Active Service Content এর পর এই অংশটুকু বসবে */}
-        
+
         {/* Supported Payment Methods Section */}
         <div className="mt-24 pt-12 border-t border-white/10 text-center animate-slide-up">
           <p className="text-text-secondary text-sm font-medium uppercase tracking-widest mb-6">
             {lang === 'en' ? 'Secure Payment Methods' : 'নিরাপদ পেমেন্ট মাধ্যমসমূহ'}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4">
-            
-            {/* Binance Badge */}
             <div className="flex items-center gap-3 px-6 py-3 bg-surface-secondary border border-white/5 rounded-xl text-text-primary font-medium hover:border-[#F3BA2F]/50 hover:bg-[#F3BA2F]/10 transition-all duration-300 cursor-default shadow-sm">
               <div className="w-2.5 h-2.5 rounded-full bg-[#F3BA2F] shadow-[0_0_8px_#F3BA2F]"></div>
               Binance Pay
             </div>
-            
-            {/* Payoneer Badge */}
             <div className="flex items-center gap-3 px-6 py-3 bg-surface-secondary border border-white/5 rounded-xl text-text-primary font-medium hover:border-[#FF4800]/50 hover:bg-[#FF4800]/10 transition-all duration-300 cursor-default shadow-sm">
               <div className="w-2.5 h-2.5 rounded-full bg-[#FF4800] shadow-[0_0_8px_#FF4800]"></div>
               Payoneer
             </div>
-
           </div>
         </div>
 
