@@ -7,6 +7,7 @@ import Login from './pages/auth/Login';
 import Dashboard from './pages/admin/Dashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import Lab from './pages/public/Lab';
+import Projects from './pages/public/Projects';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/lab" element={<Lab />} />
             {/* ভবিষ্যতে /projects এবং /contact পেজ এখানেই যুক্ত হবে */}
           </Route>
